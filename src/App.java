@@ -5,7 +5,7 @@ public class App {
     private final JFrame frame = new JFrame();
     private JPanel  butPan = new JPanel();
     private DrawPanel drawPan;
-    private static final String[] butNames = {"RECTANGLE", "CIRCLE", "LINE", "ELLIPSE", "SELECT", "CLEAR", "DRAG"};
+    private static final String[] butNames = {"RECTANGLE", "CIRCLE", "LINE", "ELLIPSE", "SELECT", "CLEAR"};
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -17,14 +17,14 @@ public class App {
         panelInit();
         buttonsInit();
         frameInit();
-        frame.add(butPan, BorderLayout.EAST);
-        frame.add(drawPan, BorderLayout.WEST);
+        frame.add(butPan, BorderLayout.NORTH);
+        frame.add(drawPan, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
 
     private void frameInit(){
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Mouse coordinates");
+        frame.setTitle("rysowac");
         frame.setSize(600,600);
         frame.setResizable(false);
         frame.setLayout(new BorderLayout());
@@ -32,12 +32,12 @@ public class App {
     }
 
     private void panelInit(){
-        drawPan = new DrawPanel(500,600);
+        drawPan = new DrawPanel(500,500);
     }
 
     private void buttonsInit(){
-        butPan.setPreferredSize(new Dimension(100,500));
-        butPan.setLayout(new GridLayout(0,1));
+        butPan.setPreferredSize(new Dimension(500,75));
+        butPan.setLayout(new GridLayout(1,0));
         for(int i=0; i<butNames.length; i++){
             JButton but = new JButton(butNames[i]);
             switch (butNames[i]){
@@ -84,13 +84,6 @@ public class App {
                 case "CLEAR": {
                     but.addActionListener(e-> {
                         drawPan.clear();
-                    });
-                }
-                case "DRAG":{
-                    but.addActionListener(e ->{
-                        drawPan.setActionType(DrawPanel.shape.DRAG);
-                        drawPan.setSelect(true);
-                        drawPan.setDraw(false);
                     });
                 }
             }
